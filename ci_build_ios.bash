@@ -47,7 +47,7 @@ if [ "$SKIP_SDL" != "1" ]; then
 
   # Build SDL3 for iOS
   xcodebuild -project Xcode/SDL/SDL.xcodeproj \
-             -target "libSDL3" \
+             -target "SDL3" \
              -configuration Release \
              -sdk iphoneos \
              -arch arm64 \
