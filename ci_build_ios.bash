@@ -28,8 +28,8 @@ if [ "$SKIP_LIBFFI" != "1" ]; then
   # Restore generator
   mv generate-darwin-source-and-headers.py.bak generate-darwin-source-and-headers.py
 
-  # Build libffi
-  xcodebuild -arch arm64 -sdk iphoneos -target libffi-iOS || echo "Exit code: $?"
+  # Build libffi (Added ARCHS=arm64, ONLY_ACTIVE_ARCH=YES, and bumped deployment target to bypass legacy armv7 copy phases)
+  xcodebuild -arch arm64 -sdk iphoneos -target libffi-iOS ARCHS="arm64" ONLY_ACTIVE_ARCH=YES IPHONEOS_DEPLOYMENT_TARGET=12.0 || echo "Exit code: $?"
 
   # Copy libffi
   cd ..
@@ -39,7 +39,7 @@ fi
 if [ "$SKIP_SDL" != "1" ]; then
   # Get SDL3 Source Code
   if [ ! -d SDL ]; then
-    wget "https://github.com"
+    wget "https://github.com/libsdl-org/SDL/releases/download/release-$SDL_VERSION/SDL3-$SDL_VERSION.tar.gz"
     tar xvf SDL3-$SDL_VERSION.tar.gz
     mv SDL3-$SDL_VERSION SDL
   fi
