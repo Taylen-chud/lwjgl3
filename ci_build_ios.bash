@@ -11,7 +11,7 @@ mkdir -p $LWJGL_NATIVE/sdl
 if [ "$SKIP_LIBFFI" != "1" ]; then
   # Get libffi
   if [ ! -d libffi ]; then
-    wget https://github.com
+    wget https://github.com/libffi/libffi/releases/download/v$LIBFFI_VERSION/libffi-$LIBFFI_VERSION.tar.gz
     tar xvf libffi-$LIBFFI_VERSION.tar.gz
     mv libffi-$LIBFFI_VERSION libffi
   fi
@@ -45,7 +45,7 @@ if [ "$SKIP_SDL" != "1" ]; then
   fi
   cd SDL
 
-  # Build SDL3 for iOS arm64 using the official Xcode framework target
+  # Build SDL3 for iOS
   xcodebuild -project Xcode/SDL/SDL.xcodeproj \
              -target "libSDL3" \
              -configuration Release \
@@ -59,9 +59,9 @@ if [ "$SKIP_SDL" != "1" ]; then
 fi
 
 # Download libraries
-#POJAV_NATIVES="https://github.com"
+#POJAV_NATIVES="https://github.com/PojavLauncherTeam/PojavLauncher_iOS/raw/main/Natives/resources/Frameworks"
 #wget -nc $POJAV_NATIVES/libopenal.so -P $LWJGL_NATIVE/openal
-wget -nc "https://github.com"
+wget -nc "https://github.com/AngelAuraMC/shaderc/releases/latest/download/libshaderc-ios.zip"
 unzip -o libshaderc-ios.zip -d $LWJGL_NATIVE/shaderc
 rm $LWJGL_NATIVE/shaderc/libshaderc_shared.1.dylib
 mv $LWJGL_NATIVE/shaderc/libshaderc_shared.dylib $LWJGL_NATIVE/shaderc/libshaderc.dylib
